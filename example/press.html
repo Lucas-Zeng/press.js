@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no, minimal-ui">
+	<title>Document</title>
+</head>
+<body>
+	<div class="clickBox"></div>
+	<div class="info">
+	</div>
+<script src="../vendor/zepto.min.js"></script>
+<script src="../vendor/kungfu.js"></script>
+<script src="../dist/press.min.js"></script>
+<style>
+	
+	body {
+		padding: 0;
+		margin: 10px;
+	}
+	.clickBox {
+		width: 100%;
+		height: 100px;
+		background: red;
+	}
+
+	.info {
+		margin: 10px 0 0 10px;
+		float: left;
+	}
+	.press {
+        -webkit-animation: press 1s linear forwards;
+                animation: press 1s linear forwards;
+    }
+    @-webkit-keyframes press
+    {
+      0% { opacity: 1;  -webkit-transform: scale(1);}
+      85% { opacity: .5;  -webkit-transform: scale(.98);}
+      90% {opacity: .7 ; -webkit-transform:scale(1.02);}
+      100% {opacity: 1; -webkit-transform:scale(1);}
+    }
+	@keyframes press
+    {
+      0% { opacity: 1;  -webkit-transform: scale(1);}
+      85% { opacity: .5;  -webkit-transform: scale(.98);}
+      90% {opacity: .7 ; -webkit-transform:scale(1.02);}
+      100% {opacity: 1; -webkit-transform:scale(1);}
+    }
+
+</style>
+<script>
+
+$(".clickBox").on('press', {
+	delay: 100,
+	duration: 1000,
+	onpress: function(e){
+		this.classList.add( 'press' );
+
+		$('.info').empty().append('<div>press start </div>')
+	},
+	onpresscancel: function(e){	
+		this.classList.remove( 'press' );
+		$('.info').append('<div>press cancel, reason: '+ e.reason+'</div>')
+	},
+	onpressed: function(e){
+		this.classList.remove( 'press' );
+		$('.info').append('<div>press complete</div>')
+	}
+});
+
+ 
+</script>
+</body>
+</html>		
